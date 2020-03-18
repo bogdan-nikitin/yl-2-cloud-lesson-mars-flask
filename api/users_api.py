@@ -43,7 +43,8 @@ def create_users():
     if not all(key in request.json for key in fields + ['password']):
         return jsonify({'error': 'Bad request'})
     session = db_session.create_session()
-    if user_id := request.json.get('id'):
+    user_id = request.json.get('id')
+    if user_id:
         ids = list(map(operator.itemgetter(0), session.query(User.id).all()))
         if user_id in ids:
             return jsonify({'error': 'Id already exists'})
@@ -79,7 +80,8 @@ def put_users(users_id):
               'email']
     for key in set(request.json.keys()) & set(fields + ['city_from']):
         users.__setattr__(key, request.json[key])
-    if (password := request.json.get('password')) is not None:
+    password = request.json.get('password')
+    if password is not None:
         users.set_password(password)
     users.modified_date = datetime.datetime.now()
     session.commit()

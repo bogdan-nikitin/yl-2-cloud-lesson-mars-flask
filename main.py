@@ -1,8 +1,6 @@
 from flask_login import login_user, login_required, logout_user, current_user
 from flask_login.login_manager import LoginManager
 
-from flask_ngrok import run_with_ngrok
-
 from flask_restful import Api
 from resources import users_resource, jobs_resource
 
@@ -40,8 +38,6 @@ GEOCODER_API_KEY = "40d1649f-0493-4b70-98ba-98533de7710b"
 # Конфигурация приложения
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
-
-# run_with_ngrok(app)
 
 app.register_blueprint(jobs_api.blueprint)
 app.register_blueprint(users_api.blueprint)
@@ -384,5 +380,5 @@ def users_show(user_id):
 
 if __name__ == '__main__':
     db_session.global_init('db/martians.db')
-    app.run()
+    app.run(port=PORT)
 

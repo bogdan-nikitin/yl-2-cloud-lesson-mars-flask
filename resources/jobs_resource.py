@@ -69,7 +69,8 @@ class JobsResource(Resource):
                 set_collaborators(jobs, args)
             except Exception as e:
                 return jsonify({'error': str(e)})
-        if is_finished := args.get('is_finished'):
+        is_finished = args.get('is_finished')
+        if is_finished:
             if not jobs.is_finished and is_finished:
                 jobs.end_date = datetime.datetime.now()
             elif jobs.is_finished and not is_finished:
@@ -105,7 +106,8 @@ class JobsListResource(Resource):
              end_date=args.get('end_date')
         )
         jobs.author = jobs.team_leader
-        if jobs_id := args.get('jobs_id'):
+        jobs_id = args.get('jobs_id')
+        if jobs_id:
             jobs.id = jobs_id
         if not jobs.end_date and jobs.is_finished:
             jobs.end_date = datetime.datetime.now()

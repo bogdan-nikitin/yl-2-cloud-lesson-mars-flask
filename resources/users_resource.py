@@ -46,7 +46,8 @@ class UsersResource(Resource):
         user.speciality = args.get('speciality', user.speciality)
         user.address = args.get('address', user.address)
         user.email = args.get('email', user.email)
-        if password := args.get('password'):
+        password = args.get('password')
+        if password:
             user.set_password(password)
         user.modified_date = datetime.datetime.now()
         session.commit()
