@@ -382,5 +382,5 @@ def users_show(user_id):
 
 if __name__ == '__main__':
     db_session.global_init('db/martians.db')
-    app.run(port=PORT)
+    app.run(host="0.0.0.0", port=int(os.environ.get('PORT', 5000)))
 
