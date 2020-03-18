@@ -379,6 +379,7 @@ def users_show(user_id):
 
 
 if __name__ == '__main__':
+    # comment
     db_session.global_init('db/martians.db')
     app.run(port=PORT)
 
