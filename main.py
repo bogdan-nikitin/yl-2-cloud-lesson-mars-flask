@@ -41,7 +41,7 @@ GEOCODER_API_KEY = "40d1649f-0493-4b70-98ba-98533de7710b"
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
-run_with_ngrok(app)
+# run_with_ngrok(app)
 
 app.register_blueprint(jobs_api.blueprint)
 app.register_blueprint(users_api.blueprint)
