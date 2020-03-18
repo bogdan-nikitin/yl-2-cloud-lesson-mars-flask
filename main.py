@@ -1,3 +1,5 @@
+import os
+
 from flask_login import login_user, login_required, logout_user, current_user
 from flask_login.login_manager import LoginManager
 
@@ -379,7 +381,6 @@ def users_show(user_id):
 
 
 if __name__ == '__main__':
-    # comment
     db_session.global_init('db/martians.db')
     app.run(port=PORT)
 
