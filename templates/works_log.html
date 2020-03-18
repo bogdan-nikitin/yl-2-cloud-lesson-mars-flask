@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-12">
+            <div class="list-block">
+                <div class="list-block-header">
+                    <h1>{{ title }}</h1>
+                </div>
+                <div class="list-block-buttons">
+                    <a href="/departments" class="btn btn-secondary">Go to Departments</a>
+                    {% if current_user.is_authenticated %}
+                    <a class="btn btn-secondary" href="/add_job">Add Job</a>
+                    {% endif %}
+                </div>
+                {% if jobs|length == 0 %}
+                <h3 class="list-block-no-elements-msg">
+                    No work has been created yet
+                </h3>
+                {% endif %}
+                {% for job in jobs %}
+                <div class="list-block-element-block">
+                    <div class="list-block-element-header">
+                        <h2>Action # {{ loop.index }}</h2>
+                        {% if current_user.id in [job.author, 1] %}
+                        <div class="list-block-edit-element-buttons">
+                            <a class="btn btn-warning" href="/edit_job/{{ job.id }}">
+                                Edit Job
+                            </a>
+                            <a class="btn btn-danger" href="/del_job/{{ job.id }}">
+                                Delete Job
+                            </a>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <table class="table-borderless table">
+                        <thead>
+                            <tr class="list-block-table-header">
+                                <th scope="col">Title of activity</th>
+                                <th scope="col">Leader</th>
+                                <th scope="col">Duration</th>
+                                <th scope="col">List of collaborators</th>
+                                <th scope="col">Hazard category</th>
+                                <th scope="col">Is finished</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="list-block-table-value-cell">
+                                    {{ job.job }}
+                                </td>
+                                <td class="list-block-table-value-cell">
+                                    {% set user = session.query(User).filter(User.id == job.team_leader).first() %}
+                                    {{ user.name }} {{ user.surname }}
+                                </td>
+                                <td class="list-block-table-value-cell">
+                                    {{ job.work_size }} hours
+                                </td>
+                                <td class="list-block-table-value-cell">
+                                    {{ job.collaborators }}
+                                </td>
+                                <td class="list-block-table-value-cell">
+                                    {% if job.categories %}
+                                    {{ job.categories[0].level }}
+                                    {% endif %}
+                                </td>
+                                {% if job.is_finished %}
+                                <td class="action-table-finished-cell">
+                                    Finished
+                                </td>
+                                {% else %}
+                                <td class="action-table-unfinished-cell">
+                                    Is not finished
+                                </td>
+                                {% endif %}
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

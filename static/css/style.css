@@ -1,0 +1,82 @@
+.page-header-text{
+    vertical-align: middle;
+}
+.page-header{
+    background-color: #F8F9FA;
+}
+.mission-title-col{
+    text-align: right;
+    vertical-align: center;
+}
+.page-header-signature{
+    color: #CECECC;
+}
+.page-header-nav-buttons{
+    display: flex;
+    align-items: center;
+}
+.page-header-nav-buttons *:not(:last-child){
+    margin-right: 5px;
+}
+.page-header-username{
+    color: black;
+}
+
+
+
+.list-block-element-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.list-block-no-elements-msg{
+    color: lightgray;
+    text-align: center;
+}
+.list-block{
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+}
+.list-block-header{
+    text-align: center;
+    margin-bottom: 20px;
+}
+.list-block-table-header{
+    background-color: #DDD;
+}
+.list-block-table-value-cell{
+    background-color: #EEEEFF;
+}
+.list-block-buttons{
+    padding-bottom: 20px;
+}
+
+
+.action-table-finished-cell{
+    background-color: #EEFFEE;
+}
+.action-table-unfinished-cell{
+    background-color: #FFEEFF;
+}
+
+
+
+.default-form-wrapper{
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 80%;
+}
+
+
+.user-show-block{
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 800px;
+}
+.user-show-block-header{
+    text-align: center;
+}
+.user-show-block-hometown-img{
+    width: 100%;
+}

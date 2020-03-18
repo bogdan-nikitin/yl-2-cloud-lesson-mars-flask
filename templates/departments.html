@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-12">
+            <div class="list-block">
+                <div class="list-block-header">
+                    <h1>{{ title }}</h1>
+                </div>
+                <div class="list-block-buttons">
+                    <a href="/" class="btn btn-secondary">Back to Jobs</a>
+                    {% if current_user.is_authenticated %}
+                    <a class="btn btn-secondary" href="/add_department">Add a Department</a>
+                    {% endif %}
+                </div>
+                {% if departments|length == 0 %}
+                <h3 class="list-block-no-elements-msg">
+                    No department has been created yet
+                </h3>
+                {% endif %}
+                {% for department in departments %}
+                <div class="list-block-element-block">
+                    <div class="list-block-element-header">
+                        <h2>Department # {{ loop.index }}</h2>
+                        {% if current_user.id in [department.author, 1] %}
+                        <div class="list-block-edit-element-buttons">
+                            <a class="btn btn-warning" href="/edit_department/{{ department.id }}">
+                                Edit Department
+                            </a>
+                            <a class="btn btn-danger" href="/del_department/{{ department.id }}">
+                                Delete Department
+                            </a>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <table class="table-borderless table">
+                        <thead>
+                            <tr class="list-block-table-header">
+                                <th scope="col">Title of department</th>
+                                <th scope="col">Chief</th>
+                                <th scope="col">Members</th>
+                                <th scope="col">Department Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="list-block-table-value-cell">
+                                    {{ department.title }}
+                                </td>
+                                <td class="list-block-table-value-cell">
+                                    {% set user = session.query(User).filter(User.id == department.chief).first() %}
+                                    {{ user.name }} {{ user.surname }}
+                                </td>
+                                <td class="list-block-table-value-cell">
+                                    {{ department.members }}
+                                </td>
+                                <td class="list-block-table-value-cell">
+                                    {{ department.email }}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

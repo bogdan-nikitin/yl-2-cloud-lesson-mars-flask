@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="row">
+        <div class="col">
+            <div class="user-show-block">
+                <div class="user-show-block-header">
+                    <h2>Nostalgy</h2>
+                    <h2>{{ user.name }} {{ user.surname }}</h2>
+                    <h3>Hometown {{ user.city_from }}</h3>
+                </div>
+                <img src="{{ city_img_src }}" alt="Hometown Image" class="user-show-block-hometown-img">
+            </div>
+        </div>
+    </div>
+{% endblock %}
